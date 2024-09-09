@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Chatbot</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="scenario-container">
+        <h2>Scenario</h2>
+        <p>
+            <strong>You are a 35-year-old marketing professional living in the Midwest. Over the past week, you've been dealing with persistent symptoms, including:</strong>
+        </p>
+        <ul>
+            <li>Sneezing</li>
+            <li>A runny nose with clear discharge</li>
+            <li>Itchy and watery eyes</li>
+            <li>A slightly scratchy throat</li>
+        </ul>
+        <p>These symptoms seem to worsen when you're outdoors, particularly in the morning. You've never had allergies before and are unsure if this is a cold or allergies.</p>
+        <h3>Tasks:</h3>
+        <ul>
+            <li><strong>T1:</strong> Use the AI chatbot to explore potential causes of your symptoms.</li>
+            <li><strong>T2:</strong> Differentiate between allergies and the common cold.</li>
+            <li><strong>T3:</strong> Discuss over-the-counter treatment options, such as antihistamines, nasal sprays, and eye drops.</li>
+            <li><strong>T4:</strong> Ask about potential side effects of these treatments and how they may affect your daily work performance.</li>
+        </ul>
+        <p>Please engage with the chatbot for at least 15 minutes and feel free to ask follow-up questions. After completing the tasks, click the "End Conversation" button to conclude.</p>
+    </div>
+
+    <div class="chat-container">
+        <div class="chat-header">
+            <h1>Chat with Our AI</h1>
+            <button id="end-conversation-btn" onclick="endConversation()">End Conversation</button>
+        </div>
+        <div id="chat-window" class="chat-window">
+            <div id="messages" class="messages"></div>
+        </div>
+        <div class="input-container">
+            <input type="text" id="user-input" placeholder="Type a message..." class="user-input">
+            <button onclick="sendMessage()" class="send-btn">Send</button>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="app.js"></script>
+
+    <script>
+        // Firebase configuration (replace with your own config)
+        const firebaseConfig = {
+            apiKey: "AIzaSyDEK8803L76RIXeL5vidCFaW5i0yI6ihBI",
+            authDomain: "llm-project-29cc6.firebaseapp.com",
+            projectId: "llm-project-29cc6",
+            storageBucket: "llm-project-29cc6.appspot.com",
+            messagingSenderId: "966047356018",
+            appId: "1:966047356018:web:ed42995c8dc67836401eeb",
+            measurementId: "G-WZF6DR4JFR"
+        };
+        
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        document.getElementById('user-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault(); // Prevents newline in textarea
+                sendMessage();
+            }
+        });
+
+        document.getElementById('end-conversation-btn').addEventListener('click', endConversation);
+    </script>
+</body>
+</html>
+
